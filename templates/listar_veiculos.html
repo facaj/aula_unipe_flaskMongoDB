@@ -1,0 +1,42 @@
+{% extends "template_bootstrap.html" %}
+
+{% block title %}Listar Veículos{% endblock %}
+
+{% block content %}
+    <h1>Lista de Veículos</h1>
+    <table class="table table-bordered table-striped">
+        <thead class="thead-dark">
+            <tr>
+                <th>Marca</th>
+                <th>Modelo</th>
+                <th>Ano</th>
+                <th>Categoria</th>
+                <th>Preço</th>
+                <th>Descrição</th>
+                <th colspan="2">Ações</th>
+            </tr>
+        </thead>
+        {% for veiculo in veiculos %}
+            <tr>
+                <td>{{ veiculo.marca }}</td>
+                <td>{{ veiculo.modelo }}</td>
+                <td>{{ veiculo.ano }}</td>
+                <td>{{ veiculo.categoria }}</td>
+                <td>{{ veiculo.preco }}</td>
+                <td>{{ veiculo.descricao }}</td>
+                <td>
+                    <form method="GET" action="/editar_veiculo/{{ veiculo._id }}">
+                        <button type="submit" class="btn btn-primary">Editar</button>
+                    </form>
+                </td>
+                <td>
+                    <form method="POST" action="/excluir_veiculo/{{ veiculo._id }}">
+                        <button type="submit" class="btn btn-danger">Excluir</button>
+                    </form>
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+    <br><br>
+    <a href="/inserir_veiculo" class="btn btn-success">Inserir novo veículo</a>
+{% endblock %}
